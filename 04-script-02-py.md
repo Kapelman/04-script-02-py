@@ -139,12 +139,138 @@ Namespace(path='/home/vagrant/netology/sysadm-homeworks')
 
 ### Ваш скрипт:
 ```python
-???
+import os
+import socket
+import datetime
+import time
+
+dns_list = ['drive.google.com','mail.google.com','google.com']
+
+dns_ip_prev = dict()
+dns_ip_cur = dict()
+
+for dns_name in dns_list:
+    dns_ip_prev[dns_name] = ''
+    dns_ip_cur[dns_name] = ''
+
+
+for i in range(20):
+    time.sleep(5)
+    print(" ")
+    print(datetime.datetime.now())
+
+    for dns_name in dns_list:
+        ip1 = socket.gethostbyname (dns_name)
+        prev_ip = dns_ip_prev[dns_name]
+        if  prev_ip != ip1 and dns_ip_prev[dns_name] != '':
+            dns_ip_cur[dns_name] = ip1
+            print('[ERROR] ' + dns_name +' '+'IP mismatch: ' + dns_ip_prev[dns_name] +' ' + dns_ip_cur[dns_name])
+        else:
+            dns_ip_prev[dns_name] = ip1
+            dns_ip_cur [dns_name] = ip1
+            print(dns_name + ' - ' + dns_ip_prev[dns_name])
 ```
 
 ### Вывод скрипта при запуске при тестировании:
 ```
-???
+vagrant@vagrant:~/py_script$ python main3.py
+
+2022-04-16 21:49:17.961118
+drive.google.com - 142.251.1.194
+mail.google.com - 142.251.1.18
+google.com - 173.194.73.138
+
+2022-04-16 21:49:22.966714
+drive.google.com - 142.251.1.194
+mail.google.com - 142.251.1.18
+google.com - 173.194.73.138
+
+2022-04-16 21:49:27.975443
+drive.google.com - 142.251.1.194
+mail.google.com - 142.251.1.18
+google.com - 173.194.73.138
+
+2022-04-16 21:49:32.979503
+drive.google.com - 142.251.1.194
+mail.google.com - 142.251.1.18
+google.com - 173.194.73.138
+
+2022-04-16 21:49:37.987814
+drive.google.com - 142.251.1.194
+mail.google.com - 142.251.1.18
+google.com - 173.194.73.138
+
+2022-04-16 21:49:43.049816
+drive.google.com - 142.251.1.194
+mail.google.com - 142.251.1.18
+google.com - 173.194.73.138
+
+2022-04-16 21:49:48.054623
+drive.google.com - 142.251.1.194
+mail.google.com - 142.251.1.18
+google.com - 173.194.73.138
+
+2022-04-16 21:49:53.067587
+drive.google.com - 142.251.1.194
+mail.google.com - 142.251.1.18
+google.com - 173.194.73.138
+
+2022-04-16 21:49:58.074738
+drive.google.com - 142.251.1.194
+mail.google.com - 142.251.1.18
+google.com - 173.194.73.138
+
+2022-04-16 21:50:03.088313
+drive.google.com - 142.251.1.194
+mail.google.com - 142.251.1.18
+google.com - 173.194.73.138
+
+2022-04-16 21:50:08.101860
+drive.google.com - 142.251.1.194
+[ERROR] mail.google.com IP mismatch: 142.251.1.18 142.251.1.19
+google.com - 173.194.73.138
+
+2022-04-16 21:50:13.109307
+drive.google.com - 142.251.1.194
+[ERROR] mail.google.com IP mismatch: 142.251.1.18 142.251.1.19
+google.com - 173.194.73.138
+
+2022-04-16 21:50:18.115850
+drive.google.com - 142.251.1.194
+[ERROR] mail.google.com IP mismatch: 142.251.1.18 142.251.1.19
+google.com - 173.194.73.138
+
+2022-04-16 21:50:23.124475
+drive.google.com - 142.251.1.194
+[ERROR] mail.google.com IP mismatch: 142.251.1.18 142.251.1.19
+google.com - 173.194.73.138
+
+2022-04-16 21:50:28.133042
+drive.google.com - 142.251.1.194
+[ERROR] mail.google.com IP mismatch: 142.251.1.18 142.251.1.19
+google.com - 173.194.73.138
+
+2022-04-16 21:50:33.136079
+drive.google.com - 142.251.1.194
+[ERROR] mail.google.com IP mismatch: 142.251.1.18 142.251.1.19
+google.com - 173.194.73.138
+
+2022-04-16 21:50:38.142148
+drive.google.com - 142.251.1.194
+[ERROR] mail.google.com IP mismatch: 142.251.1.18 142.251.1.19
+google.com - 173.194.73.138
+
+2022-04-16 21:50:43.149210
+drive.google.com - 142.251.1.194
+[ERROR] mail.google.com IP mismatch: 142.251.1.18 142.251.1.19
+google.com - 173.194.73.138
+
+2022-04-16 21:50:48.156961
+drive.google.com - 142.251.1.194
+[ERROR] mail.google.com IP mismatch: 142.251.1.18 142.251.1.19
+google.com - 173.194.73.138
+^Z
+[3]+  Stopped                 python main3.py
 ```
 
 ## Дополнительное задание (со звездочкой*) - необязательно к выполнению
